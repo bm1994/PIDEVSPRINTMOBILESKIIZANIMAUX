@@ -25,10 +25,14 @@ import com.codename1.ui.Container;
 import com.codename1.ui.Display;
 import com.codename1.ui.Label;
 import com.codename1.ui.TextField;
+import com.codename1.ui.events.ActionEvent;
+import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.util.Resources;
+import com.mycompagny.Service.UserService;
+import com.mycompany.Entite.User;
 
 /**
  * Sign in UI
@@ -36,7 +40,7 @@ import com.codename1.ui.util.Resources;
  * @author Shai Almog
  */
 public class SignInForm extends BaseForm {
-
+public static User staticUser;
     public SignInForm(Resources res) {
         super(new BorderLayout());
         
@@ -71,7 +75,16 @@ public class SignInForm extends BaseForm {
         content.setScrollableY(true);
         add(BorderLayout.SOUTH, content);
         signIn.requestFocus();
-                signIn.addActionListener(e -> new NewsfeedForm(res).show());
+                signIn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                UserService u= new UserService();
+                if(u.verification(username.getText(), password.getText())){
+                    NewsfeedForm w=new NewsfeedForm(res);
+                    w.show();
+                }
+            }
+        });
 
     }
     
