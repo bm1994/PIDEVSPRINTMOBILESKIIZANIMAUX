@@ -34,6 +34,7 @@ import com.codename1.ui.layouts.GridLayout;
 import com.codename1.ui.layouts.LayeredLayout;
 import com.codename1.ui.plaf.Style;
 import com.codename1.ui.util.Resources;
+import com.mycompany.Entite.User;
 
 /**
  * The user profile form
@@ -80,15 +81,28 @@ public class ProfileForm extends BaseForm {
                 )
         ));
 
-        TextField username = new TextField("sandeep");
+        TextField username = new TextField(User.connected.getUsername());
         username.setUIID("TextFieldBlack");
         addStringValue("Username", username);
+        
+        TextField name = new TextField(User.connected.getNom());
+        name.setUIID("TextFieldBlack");
+        addStringValue("nom", name);
+        
+          TextField prenom = new TextField(User.connected.getPrenom());
+        prenom.setUIID("TextFieldBlack");
+        addStringValue("prenom", prenom);
+        
+          TextField adresse = new TextField(User.connected.getAdresse());
+        adresse.setUIID("TextFieldBlack");
+        addStringValue("adresse", adresse);
+        
 
-        TextField email = new TextField("sandeep@gmail.com", "E-Mail", 20, TextField.EMAILADDR);
+        TextField email = new TextField(User.connected.getEmail(), "E-Mail", 20, TextField.EMAILADDR);
         email.setUIID("TextFieldBlack");
         addStringValue("E-Mail", email);
         
-        TextField password = new TextField("sandeep", "Password", 20, TextField.PASSWORD);
+        TextField password = new TextField(User.connected.getMdp(), "Password", 20, TextField.PASSWORD);
         password.setUIID("TextFieldBlack");
         addStringValue("Password", password);
 
