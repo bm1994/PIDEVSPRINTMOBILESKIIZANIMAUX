@@ -67,8 +67,9 @@ public class Boutique extends   BaseForm {
 
         Label spacer1 = new Label();
         Label spacer2 = new Label();
-        addTab(swipe, res.getImage("news-item.jpg"), spacer1, "SkiizAnimaux  ", "", "Voici la liste de nos Produits ");
-        addTab(swipe, res.getImage("dog.jpg"), spacer2, "100 Likes  ", "66 Comments", "Dogs are cute: story at 11");
+        addTab(swipe, res.getImage("dogg.jpg"), spacer1, "SkiizAnimaux  ", "", " ");
+        addTab(swipe, res.getImage("catt.jpg"), spacer2, " ", "", "");
+
                 
         swipe.setUIID("Container");
         swipe.getContentPane().setUIID("Container");

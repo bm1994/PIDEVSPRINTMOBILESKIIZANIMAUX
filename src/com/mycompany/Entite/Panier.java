@@ -16,6 +16,14 @@ public class Panier {
     private int idPersonne;
     public float prix;
 
+    public Panier(int id, String name, int idProduit, int idPersonne, float prix) {
+        this.id = id;
+        this.name = name;
+        this.idProduit = idProduit;
+        this.idPersonne = idPersonne;
+        this.prix = prix;
+    }
+
     public Panier(String name, int idProduit, int idPersonne, float prix) {
         this.name = name;
         this.idProduit = idProduit;
@@ -23,7 +31,7 @@ public class Panier {
         this.prix = prix;
     }
 
-    public Panier(int id, String name, int idProduit, int idPersonne, float prix) {
+    public Panier(int id, String name, float prix, int idProduit, int idPersonne) {
         this.id = id;
         this.name = name;
         this.idProduit = idProduit;

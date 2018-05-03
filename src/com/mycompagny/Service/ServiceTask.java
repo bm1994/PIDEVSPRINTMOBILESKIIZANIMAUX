@@ -15,6 +15,7 @@ import com.mycompany.Entite.Annonce;
 import com.mycompany.Entite.Panier;
 import com.mycompany.Entite.Produit;
 import com.mycompany.Entite.Task;
+import com.mycompany.Entite.User;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -191,16 +192,10 @@ public class ServiceTask {
                 float aa = Float.parseFloat(obj.get("id").toString());
                 a.setId((int)aa);
                 
-                float aaaa = Float.parseFloat(obj.get("idPersonne").toString());
-                a.setIdPersonne((int)aaaa);
+                a.setName(obj.get("nom").toString());
                 
-                float aaaaaa = Float.parseFloat(obj.get("idProduit").toString());
-                a.setIdProduit((int)aaaaaa);
-
                 float aaa = Float.parseFloat(obj.get("prix").toString());
                 a.setPrix((int)aaa);
-               // a.setId(Integer.parseInt(obj.get("id").toString()));
-                a.setName(obj.get("nom").toString());
 
 
                 System.out.println(a);
@@ -217,6 +212,24 @@ public class ServiceTask {
      
       
       
+    
+            ArrayList<Panier> listpanierr = new ArrayList<>();
+
+      public ArrayList<Panier> getList4(int id){ 
+          id=User.connected.getNd();
+        ConnectionRequest con = new ConnectionRequest();
+        con.setUrl("http://localhost/skiizanimauxfinale/web/app_dev.php/mobile/panier/"+id);  
+        con.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                ServiceTask ser = new ServiceTask();
+                listpanierr = ser.getListPanier(new String(con.getResponseData()));
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(con);
+        return listpanierr ;
+    }
+
       
       
       

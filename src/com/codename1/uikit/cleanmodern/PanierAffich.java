@@ -32,6 +32,11 @@ import com.codename1.ui.layouts.GridLayout;
 import com.codename1.ui.layouts.LayeredLayout;
 import com.codename1.ui.plaf.Style;
 import com.codename1.ui.util.Resources;
+import com.mycompagny.Service.ServiceBoutique;
+import com.mycompagny.Service.ServiceTask;
+import com.mycompany.Entite.Panier;
+import com.mycompany.Entite.User;
+import java.util.ArrayList;
 
 /**
  *
@@ -55,8 +60,8 @@ public class PanierAffich extends   BaseForm {
         Label spacer1 = new Label();
         Label spacer2 = new Label();
         
-        addTab(swipe, res.getImage("news-item.jpg"), spacer1, "15 Likes  ", "85 Comments", "Integer ut placerat purued non dignissim neque. ");
-        addTab(swipe, res.getImage("dog.jpg"), spacer2, "100 Likes  ", "66 Comments", "Dogs are cute: story at 11");
+        addTab(swipe, res.getImage("cdcd1.jpg"), spacer1, " ", "", "");
+        addTab(swipe, res.getImage("d11.jpg"), spacer2, "", "", "");
         swipe.setUIID("Container");
         swipe.getContentPane().setUIID("Container");
         swipe.hideTabs();
@@ -126,11 +131,16 @@ public class PanierAffich extends   BaseForm {
         addOrientationListener(e -> {
             updateArrowPosition(barGroup.getRadioButton(barGroup.getSelectedIndex()), arrow);
         });
-        
-        addButton(res.getImage("news-item-1.jpg"), "Morbi per tincidunt tellus sit of amet eros laoreet.", false, 26, 32);
-        addButton(res.getImage("news-item-2.jpg"), "Fusce ornare cursus masspretium tortor integer placera.", true, 15, 21);
-        addButton(res.getImage("news-item-3.jpg"), "Maecenas eu risus blanscelerisque massa non amcorpe.", false, 36, 15);
-        addButton(res.getImage("news-item-4.jpg"), "Pellentesque non lorem diam. Proin at ex sollicia.", false, 11, 9);
+        ServiceTask ser = new ServiceTask();
+					ArrayList<Panier> Tab = ser.getList4(User.connected.getNd());
+					for (int i = 0; i < Tab.size(); i++) {
+						addButton(res.getImage("nvnv3.jpg"),Tab.get(i).getName()+ " Prix :" + Tab.get(i).getPrix(), false, 11, 9);
+                                        
+                                         
+                
+                        
+
+					}
     }
     
     private void updateArrowPosition(Button b, Label arrow) {
@@ -177,8 +187,7 @@ public class PanierAffich extends   BaseForm {
 
         swipe.addTab("", page1);
     }
-    
-   private void addButton(Image img, String title, boolean liked, int likeCount, int commentCount) {
+  private void addButton(Image img, String title, boolean liked, int likeCount, int commentCount) {
        int height = Display.getInstance().convertToPixels(11.5f);
        int width = Display.getInstance().convertToPixels(14f);
        Button image = new Button(img.fill(width, height));
@@ -211,6 +220,7 @@ public class PanierAffich extends   BaseForm {
        add(cnt);
        image.addActionListener(e -> ToastBar.showMessage(title, FontImage.MATERIAL_INFO));
    }
+    
     
     private void bindButtonSelection(Button b, Label arrow) {
         b.addActionListener(e -> {
