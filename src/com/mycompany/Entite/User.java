@@ -10,6 +10,16 @@ package com.mycompany.Entite;
  * @author asus
  */
 public class User {
+    public static User connected;
+
+    public static User getConnected() {
+        return connected;
+    }
+
+    public static void setConnected(User connected) {
+        User.connected = connected;
+    }
+    
     private int nd;
     private String nom;
         private String prenom;

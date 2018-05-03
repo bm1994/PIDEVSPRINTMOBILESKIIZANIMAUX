@@ -43,8 +43,9 @@ import com.mycompany.Entite.User;
  * @author Shai Almog
  */
 public class SignUpForm extends BaseForm {
-
+    
     public SignUpForm(Resources res) {
+        
         super(new BorderLayout());
         Toolbar tb = new Toolbar(true);
         setToolbar(tb);
@@ -94,9 +95,6 @@ public class SignUpForm extends BaseForm {
                 createLineSeparator(),
                 new FloatingHint(confirmpassword),
                 createLineSeparator()
-
-                
-
                  
         );
         content.setScrollableY(true);
@@ -131,7 +129,7 @@ public class SignUpForm extends BaseForm {
                 
                 else if (!(password.getText().equals(confirmpassword.getText()))){
                 Dialog.show("erreur", "mot de passe n'est pas identique", "ok", null);
-
+                
                 }
                 
                 else{

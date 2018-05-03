@@ -79,6 +79,7 @@ public class UserService {
 
                     System.out.println("it works!");
                     staticUser = new User();
+                    User.setConnected(user);
                     staticUser.setNd(user.getNd());
                     staticUser.setUsername(user.getUsername());
                     staticUser.setNom(user.getNom());

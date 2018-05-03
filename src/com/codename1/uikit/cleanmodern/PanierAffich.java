@@ -5,7 +5,6 @@
  */
 package com.codename1.uikit.cleanmodern;
 
-import com.codename1.components.ImageViewer;
 import com.codename1.components.ScaleImageLabel;
 import com.codename1.components.SpanLabel;
 import com.codename1.components.ToastBar;
@@ -17,9 +16,7 @@ import static com.codename1.ui.Component.CENTER;
 import static com.codename1.ui.Component.LEFT;
 import static com.codename1.ui.Component.RIGHT;
 import com.codename1.ui.Container;
-import com.codename1.ui.Dialog;
 import com.codename1.ui.Display;
-import com.codename1.ui.EncodedImage;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Graphics;
 import com.codename1.ui.Image;
@@ -28,9 +25,6 @@ import com.codename1.ui.RadioButton;
 import com.codename1.ui.Tabs;
 import com.codename1.ui.TextArea;
 import com.codename1.ui.Toolbar;
-import com.codename1.ui.URLImage;
-import com.codename1.ui.events.ActionEvent;
-import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.FlowLayout;
@@ -38,26 +32,19 @@ import com.codename1.ui.layouts.GridLayout;
 import com.codename1.ui.layouts.LayeredLayout;
 import com.codename1.ui.plaf.Style;
 import com.codename1.ui.util.Resources;
-import com.mycompagny.Service.ServiceBoutique;
-import com.mycompagny.Service.ServiceTask;
-import com.mycompany.Entite.Panier;
-import com.mycompany.Entite.Produit;
-import com.mycompany.Entite.User;
-import java.util.ArrayList;
 
 /**
  *
  * @author asus
  */
-public class Boutique extends   BaseForm {
-    Container c = new Container();
-    public Boutique(Resources res) {
-        
-        super("", BoxLayout.y());
+public class PanierAffich extends   BaseForm {
+    
+    public PanierAffich(Resources res) {
+        super("Newsfeed", BoxLayout.y());
         Toolbar tb = new Toolbar(true);
         setToolbar(tb);
         getTitleArea().setUIID("Container");
-        setTitle("Boutique SkiizAnimaux");
+        setTitle("SKIIZANIMAUX");
         getContentPane().setScrollVisible(false);
         
         super.addSideMenu(res);
@@ -67,15 +54,14 @@ public class Boutique extends   BaseForm {
 
         Label spacer1 = new Label();
         Label spacer2 = new Label();
-        addTab(swipe, res.getImage("news-item.jpg"), spacer1, "SkiizAnimaux  ", "", "Voici la liste de nos Produits ");
+        
+        addTab(swipe, res.getImage("news-item.jpg"), spacer1, "15 Likes  ", "85 Comments", "Integer ut placerat purued non dignissim neque. ");
         addTab(swipe, res.getImage("dog.jpg"), spacer2, "100 Likes  ", "66 Comments", "Dogs are cute: story at 11");
-                
         swipe.setUIID("Container");
         swipe.getContentPane().setUIID("Container");
         swipe.hideTabs();
-        add(c);
+        
         ButtonGroup bg = new ButtonGroup();
-
         int size = Display.getInstance().convertToPixels(1);
         Image unselectedWalkthru = Image.createImage(size, size, 0);
         Graphics g = unselectedWalkthru.getGraphics();
@@ -141,16 +127,10 @@ public class Boutique extends   BaseForm {
             updateArrowPosition(barGroup.getRadioButton(barGroup.getSelectedIndex()), arrow);
         });
         
-       ServiceTask ser = new ServiceTask();
-					ArrayList<Produit> Tab = ser.getList3();
-					for (int i = 0; i < Tab.size(); i++) {
-						addButton(Tab.get(i).getImage(),"Nom :"+ Tab.get(i).getNom()+ "  \n Prix :" + Tab.get(i).getPrix()+ "  \n Marque :" + Tab.get(i).getMarque()+"  \n Categorie :" + Tab.get(i).getCategorie()+"  \n Disponibilite :" + Tab.get(i).getStock() , false, 11, 9, Tab.get(i).getId(),Tab.get(i).getNom(),Tab.get(i).getPrix(),Tab.get(i).getStock());
-                                        
-                                         
-                
-                        
-
-					}
+        addButton(res.getImage("news-item-1.jpg"), "Morbi per tincidunt tellus sit of amet eros laoreet.", false, 26, 32);
+        addButton(res.getImage("news-item-2.jpg"), "Fusce ornare cursus masspretium tortor integer placera.", true, 15, 21);
+        addButton(res.getImage("news-item-3.jpg"), "Maecenas eu risus blanscelerisque massa non amcorpe.", false, 36, 15);
+        addButton(res.getImage("news-item-4.jpg"), "Pellentesque non lorem diam. Proin at ex sollicia.", false, 11, 9);
     }
     
     private void updateArrowPosition(Button b, Label arrow) {
@@ -198,69 +178,39 @@ public class Boutique extends   BaseForm {
         swipe.addTab("", page1);
     }
     
-  private void addButton(String imageUrl, String title, boolean liked, int likeCount, int commentCount, int id,String nomProduit,float prixProduit, int stockProduit ) {
+   private void addButton(Image img, String title, boolean liked, int likeCount, int commentCount) {
+       int height = Display.getInstance().convertToPixels(11.5f);
+       int width = Display.getInstance().convertToPixels(14f);
+       Button image = new Button(img.fill(width, height));
+       image.setUIID("Label");
+       Container cnt = BorderLayout.west(image);
+       cnt.setLeadComponent(image);
+       TextArea ta = new TextArea(title);
+       ta.setUIID("NewsTopLine");
+       ta.setEditable(false);
 
-		ImageViewer im = new ImageViewer();
-
-		Image placeholder = Image.createImage(45, 45, 0xbfc9d2);
-		EncodedImage encImage = EncodedImage.createFromImage(placeholder, false);
-
-		im.setImage(URLImage.createToStorage(encImage, "Medium" + imageUrl, imageUrl, URLImage.RESIZE_SCALE));
-
-		int height = Display.getInstance().convertToPixels(11.5f);
-		int width = Display.getInstance().convertToPixels(14f);
-		Button image = new Button(im.getImage().fill(width, height));
-		image.setUIID("Label");
-		Container cnt = BorderLayout.west(image);
-		cnt.setLeadComponent(image);
-                
-
-		TextArea ta = new TextArea(title);
-		ta.setUIID("NewsTopLine");
-		ta.setEditable(false);
-
-		Label likes = new Label(likeCount + " Likes  ", "NewsBottomLine");
-		likes.setTextPosition(RIGHT);
-		if (!liked) {
-			FontImage.setMaterialIcon(likes, FontImage.MATERIAL_FAVORITE);
-		} else {
-			Style s = new Style(likes.getUnselectedStyle());
-			s.setFgColor(0xff2d55);
-			FontImage heartImage = FontImage.createMaterial(FontImage.MATERIAL_FAVORITE, s);
-			likes.setIcon(heartImage);
-		}
-		Label comments = new Label(commentCount + " Comments", "NewsBottomLine");
-		FontImage.setMaterialIcon(likes, FontImage.MATERIAL_CHAT);
-                Button b =new Button("ajouter");
-
-		cnt.add(BorderLayout.CENTER,
-				BoxLayout.encloseY(
-						ta,
-						BoxLayout.encloseX(likes, comments)
-				));
-		add(cnt);
-                   image.addActionListener(e -> {
-                       if(stockProduit==0){
-                       boolean y;
-                      y = Dialog.show("ce Produit n es pas disponible","","ok","");
-                       }
-                       else{
-                       boolean x ;
-			x = Dialog.show("Voulez vous l'ajouter a Panier ?","","oui","non");
-                        if(x){
-                            ServiceBoutique bb =new ServiceBoutique();
-                            Panier p =new Panier();
-                            p.setName(nomProduit);
-                            p.setIdPersonne(User.connected.getNd());
-                            p.setIdProduit(id);
-                            p.setPrix(prixProduit);
-                            bb.addPanier(p);
-                        }
-                       }
-                        
-		});
-		
-	}
+       Label likes = new Label(likeCount + " Likes  ", "NewsBottomLine");
+       likes.setTextPosition(RIGHT);
+       if(!liked) {
+           FontImage.setMaterialIcon(likes, FontImage.MATERIAL_FAVORITE);
+       } else {
+           Style s = new Style(likes.getUnselectedStyle());
+           s.setFgColor(0xff2d55);
+           FontImage heartImage = FontImage.createMaterial(FontImage.MATERIAL_FAVORITE, s);
+           likes.setIcon(heartImage);
+       }
+       Label comments = new Label(commentCount + " Comments", "NewsBottomLine");
+       FontImage.setMaterialIcon(likes, FontImage.MATERIAL_CHAT);
+       
+       
+       cnt.add(BorderLayout.CENTER, 
+               BoxLayout.encloseY(
+                       ta,
+                       BoxLayout.encloseX(likes, comments)
+               ));
+       add(cnt);
+       image.addActionListener(e -> ToastBar.showMessage(title, FontImage.MATERIAL_INFO));
+   }
     
     private void bindButtonSelection(Button b, Label arrow) {
         b.addActionListener(e -> {
@@ -269,6 +219,5 @@ public class Boutique extends   BaseForm {
             }
         });
     }
-    
     
 }

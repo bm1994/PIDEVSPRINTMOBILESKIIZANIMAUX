@@ -12,6 +12,7 @@ import com.codename1.io.NetworkEvent;
 import com.codename1.io.NetworkManager;
 import com.codename1.ui.events.ActionListener;
 import com.mycompany.Entite.Annonce;
+import com.mycompany.Entite.Panier;
 import com.mycompany.Entite.Produit;
 import com.mycompany.Entite.Task;
 import java.io.IOException;
@@ -164,11 +165,55 @@ public class ServiceTask {
         NetworkManager.getInstance().addToQueueAndWait(con);
         return listuser ;
     }
+      
 
       
       
       
       
+      public ArrayList<Panier> getListPanier(String json) {
+
+        ArrayList<Panier> listPanier = new ArrayList<>();
+
+        try {
+            System.out.println(json);
+            JSONParser j = new JSONParser();
+
+            Map<String, Object> etudiants = j.parseJSON(new CharArrayReader(json.toCharArray()));
+            System.out.println(etudiants);
+           
+            List<Map<String, Object>> list = (List<Map<String, Object>>) etudiants.get("root");
+
+            for (Map<String, Object> obj : list) {
+                  Panier a = new Panier();
+
+                // System.out.println(obj.get("id"));
+                float aa = Float.parseFloat(obj.get("id").toString());
+                a.setId((int)aa);
+                
+                float aaaa = Float.parseFloat(obj.get("idPersonne").toString());
+                a.setIdPersonne((int)aaaa);
+                
+                float aaaaaa = Float.parseFloat(obj.get("idProduit").toString());
+                a.setIdProduit((int)aaaaaa);
+
+                float aaa = Float.parseFloat(obj.get("prix").toString());
+                a.setPrix((int)aaa);
+               // a.setId(Integer.parseInt(obj.get("id").toString()));
+                a.setName(obj.get("nom").toString());
+
+
+                System.out.println(a);
+                listPanier.add(a);
+
+            }
+
+        } catch (IOException ex) {
+        }
+        System.out.println(listPanier);
+        return listPanier;
+
+    }
      
       
       
