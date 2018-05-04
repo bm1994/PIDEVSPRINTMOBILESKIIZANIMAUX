@@ -20,8 +20,14 @@
 package com.codename1.uikit.cleanmodern;
 
 import com.codename1.components.FloatingHint;
+import com.codename1.io.AccessToken;
+import com.codename1.io.Preferences;
+import com.codename1.social.FacebookConnect;
+import com.codename1.social.Login;
+import com.codename1.social.LoginCallback;
 import com.codename1.ui.Button;
 import com.codename1.ui.Container;
+import com.codename1.ui.Dialog;
 import com.codename1.ui.Display;
 import com.codename1.ui.Label;
 import com.codename1.ui.TextField;
@@ -41,6 +47,12 @@ import com.mycompany.Entite.User;
  */
 public class SignInForm extends BaseForm {
 public static User staticUser;
+ private String fullName;
+    private String uniqueId;
+    private String imageURL;
+    private String mail;
+     Resources theme;
+
     public SignInForm(Resources res) {
         super(new BorderLayout());
         
@@ -60,6 +72,7 @@ public static User staticUser;
         password.setSingleLineTextArea(false);
         Button signIn = new Button("Sign In");
         Button signUp = new Button("Sign Up");
+       
         signUp.addActionListener(e -> new SignUpForm(res).show());
         signUp.setUIID("Link");
         Label doneHaveAnAccount = new Label("Don't have an account?");
@@ -87,5 +100,7 @@ public static User staticUser;
         });
 
     }
+      
+ 
     
 }

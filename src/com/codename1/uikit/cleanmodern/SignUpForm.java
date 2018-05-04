@@ -20,6 +20,7 @@
 package com.codename1.uikit.cleanmodern;
 
 import com.codename1.components.FloatingHint;
+import com.codename1.messaging.Message;
 import com.codename1.ui.Button;
 import com.codename1.ui.Container;
 import com.codename1.ui.Dialog;
@@ -143,6 +144,9 @@ public class SignUpForm extends BaseForm {
                 u.setAdresse(adresse.getText());
                 u.setRole("a:1:{i:0;s:11:\"ROLE_CLIENT\";}");
                 uu.adduser(u);
+                Message m=new Message("ekhdem aman");
+Display.getInstance().sendMessage(new String[] {u.getEmail()}, "Subject of message", m);
+                
 
 
                 } 
