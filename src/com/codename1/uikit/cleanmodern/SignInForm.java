@@ -22,6 +22,8 @@ package com.codename1.uikit.cleanmodern;
 import com.codename1.components.FloatingHint;
 import com.codename1.io.AccessToken;
 import com.codename1.io.Preferences;
+import com.codename1.media.Media;
+import com.codename1.media.MediaManager;
 import com.codename1.social.FacebookConnect;
 import com.codename1.social.Login;
 import com.codename1.social.LoginCallback;
@@ -39,6 +41,7 @@ import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.util.Resources;
 import com.mycompagny.Service.UserService;
 import com.mycompany.Entite.User;
+import java.io.IOException;
 
 /**
  * Sign in UI
@@ -55,7 +58,13 @@ public static User staticUser;
 
     public SignInForm(Resources res) {
         super(new BorderLayout());
-        
+        Media video = null;
+        try {
+             video = MediaManager.createMedia("src\\music\\sound.mp3", true);
+        } catch (IOException ex) {
+        }
+                    
+                    video.play();
         if(!Display.getInstance().isTablet()) {
             BorderLayout bl = (BorderLayout)getLayout();
             bl.defineLandscapeSwap(BorderLayout.NORTH, BorderLayout.EAST);

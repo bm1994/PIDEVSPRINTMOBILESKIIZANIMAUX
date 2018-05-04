@@ -19,7 +19,16 @@ public class User {
     public static void setConnected(User connected) {
         User.connected = connected;
     }
-    
+        private int id_utilisateur;
+
+    public int getId_utilisateur() {
+        return id_utilisateur;
+    }
+
+    public void setId_utilisateur(int id_utilisateur) {
+        this.id_utilisateur = id_utilisateur;
+    }
+
     private int nd;
     private String nom;
         private String prenom;
@@ -31,6 +40,7 @@ public class User {
 
     public User() {
     }
+    
 
     public User(int nd, String nom, String prenom, String adresse, String mdp, String username, String email, String role) {
         this.nd = nd;

@@ -108,6 +108,8 @@ public class SignUpForm extends BaseForm {
         next.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
+                
+                
                
                 if ( nom.getText().equals("")||nom.getText().length()<3){
                 Dialog.show("erreur", "le nom doit contenir au moins 3 caracteres", "ok", null);
@@ -144,8 +146,7 @@ public class SignUpForm extends BaseForm {
                 u.setAdresse(adresse.getText());
                 u.setRole("a:1:{i:0;s:11:\"ROLE_CLIENT\";}");
                 uu.adduser(u);
-                Message m=new Message("ekhdem aman");
-Display.getInstance().sendMessage(new String[] {u.getEmail()}, "Subject of message", m);
+              
                 
 
 

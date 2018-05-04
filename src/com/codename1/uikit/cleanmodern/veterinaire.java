@@ -29,8 +29,6 @@ import com.codename1.ui.Tabs;
 import com.codename1.ui.TextArea;
 import com.codename1.ui.Toolbar;
 import com.codename1.ui.URLImage;
-import com.codename1.ui.events.ActionEvent;
-import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.FlowLayout;
@@ -38,9 +36,8 @@ import com.codename1.ui.layouts.GridLayout;
 import com.codename1.ui.layouts.LayeredLayout;
 import com.codename1.ui.plaf.Style;
 import com.codename1.ui.util.Resources;
-import com.mycompagny.Service.ServiceBoutique;
 import com.mycompagny.Service.ServiceTask;
-import com.mycompany.Entite.Panier;
+import com.mycompagny.Service.ServiceTask_1;
 import com.mycompany.Entite.Produit;
 import com.mycompany.Entite.User;
 import java.util.ArrayList;
@@ -49,11 +46,8 @@ import java.util.ArrayList;
  *
  * @author asus
  */
-public class Boutique extends   BaseForm {
-    Container c = new Container();
-    
-    public Boutique(Resources res) {
-        
+public class veterinaire extends   BaseForm {
+    public veterinaire(Resources res) {
         super("", BoxLayout.y());
         Toolbar tb = new Toolbar(true);
         setToolbar(tb);
@@ -68,16 +62,14 @@ public class Boutique extends   BaseForm {
 
         Label spacer1 = new Label();
         Label spacer2 = new Label();
-        addTab(swipe, res.getImage("dogg.jpg"), spacer1, "SkiizAnimaux  ", "", " ");
-        addTab(swipe, res.getImage("catt.jpg"), spacer2, " ", "", "");
-
+        addTab(swipe, res.getImage("dog.jpg"), spacer2, "100 Likes  ", "66 Comments", "Dogs are cute: story "
+                + "");
                 
         swipe.setUIID("Container");
         swipe.getContentPane().setUIID("Container");
         swipe.hideTabs();
-        add(c);
+        
         ButtonGroup bg = new ButtonGroup();
-
         int size = Display.getInstance().convertToPixels(1);
         Image unselectedWalkthru = Image.createImage(size, size, 0);
         Graphics g = unselectedWalkthru.getGraphics();
@@ -143,15 +135,11 @@ public class Boutique extends   BaseForm {
             updateArrowPosition(barGroup.getRadioButton(barGroup.getSelectedIndex()), arrow);
         });
         
-       ServiceTask ser = new ServiceTask();
-					ArrayList<Produit> Tab = ser.getList3();
+       ServiceTask_1 ser = new ServiceTask_1();
+					ArrayList<User> Tab = ser.getList3();
+                                        String s="http://res.cloudinary.com/russie2k18/image/upload/04b5a52a7f9b06f6a8be474f3f2a4d75.jpg";
 					for (int i = 0; i < Tab.size(); i++) {
-						addButton(res,Tab.get(i).getImage(),"Nom :"+ Tab.get(i).getNom()+ "  \n Prix :" + Tab.get(i).getPrix()+ "  \n Marque :" + Tab.get(i).getMarque()+"  \n Categorie :" + Tab.get(i).getCategorie()+"  \n Disponibilite :" + Tab.get(i).getStock() , false, 11, 9, Tab.get(i).getId(),Tab.get(i).getNom(),Tab.get(i).getPrix(),Tab.get(i).getStock());
-                                        
-                                         
-                
-                        
-
+						addButton(res,s, Tab.get(i).getNom()+ "  , " + Tab.get(i).getPrenom(),Tab.get(i).getAdresse() ,false, 11, 9, 2);
 					}
     }
     
@@ -200,10 +188,9 @@ public class Boutique extends   BaseForm {
         swipe.addTab("", page1);
     }
     
-  private void addButton(Resources res ,String imageUrl, String title, boolean liked, int likeCount, int commentCount, int id,String nomProduit,float prixProduit, int stockProduit ) {
-
+  private void addButton(Resources res,String imageUrl, String title,String adresse, boolean liked, int likeCount, int commentCount, int id) {
+imageUrl="http://res.cloudinary.com/russie2k18/image/upload/04b5a52a7f9b06f6a8be474f3f2a4d75.jpg";
 		ImageViewer im = new ImageViewer();
-
 		Image placeholder = Image.createImage(45, 45, 0xbfc9d2);
 		EncodedImage encImage = EncodedImage.createFromImage(placeholder, false);
 
@@ -215,13 +202,11 @@ public class Boutique extends   BaseForm {
 		image.setUIID("Label");
 		Container cnt = BorderLayout.west(image);
 		cnt.setLeadComponent(image);
-                
 
 		TextArea ta = new TextArea(title);
 		ta.setUIID("NewsTopLine");
 		ta.setEditable(false);
-
-		Label likes = new Label(likeCount + " Likes  ", "NewsBottomLine");
+		Label likes = new Label(likeCount + " Plus Détails sur docteur  ", "NewsBottomLine");
 		likes.setTextPosition(RIGHT);
 		if (!liked) {
 			FontImage.setMaterialIcon(likes, FontImage.MATERIAL_FAVORITE);
@@ -233,7 +218,6 @@ public class Boutique extends   BaseForm {
 		}
 		Label comments = new Label(commentCount + " Comments", "NewsBottomLine");
 		FontImage.setMaterialIcon(likes, FontImage.MATERIAL_CHAT);
-                Button b =new Button("ajouter");
 
 		cnt.add(BorderLayout.CENTER,
 				BoxLayout.encloseY(
@@ -241,31 +225,21 @@ public class Boutique extends   BaseForm {
 						BoxLayout.encloseX(likes, comments)
 				));
 		add(cnt);
-                   image.addActionListener(e -> {
-                       if(stockProduit==0){
-                       boolean y;
-                      y = Dialog.show("ce Produit n es pas disponible","","ok","");
-                       }
-                       else{
-                       boolean x ;
-			x = Dialog.show("Voulez vous l'ajouter a Panier ?","","oui","non");
-                        if(x){
-                            ServiceBoutique bb =new ServiceBoutique();
-                            Panier p =new Panier();
-                            p.setName(nomProduit);
-                            p.setIdPersonne(User.connected.getNd());
-                            p.setIdProduit(id);
-                            p.setPrix(prixProduit);
-                            bb.addPanier(p);
-                             int stockProduits=stockProduit-1;
-                            bb.settstock(id,stockProduits);
-                            new Boutique(res).show();
-                        }
-                       }
-                        
-		});
+
 		
+   image.addActionListener(e ->  { Boolean x = Dialog.show("Alerte", "Etes vous pret pour ce module ?", "oui","non");
+                        if(x)
+                        {GoogleMapsTestApp a = new GoogleMapsTestApp() ;
+                        a.start(adresse);
+                            
+                        }
+                        else {
+                        Afficher_list_rendezvous al = new Afficher_list_rendezvous(res);
+                        al.show();
+                        }
+       }); 	
 	}
+  
     
     private void bindButtonSelection(Button b, Label arrow) {
         b.addActionListener(e -> {
@@ -274,6 +248,5 @@ public class Boutique extends   BaseForm {
             }
         });
     }
-    
     
 }
