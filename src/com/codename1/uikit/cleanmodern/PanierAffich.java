@@ -16,6 +16,7 @@ import static com.codename1.ui.Component.CENTER;
 import static com.codename1.ui.Component.LEFT;
 import static com.codename1.ui.Component.RIGHT;
 import com.codename1.ui.Container;
+import com.codename1.ui.Dialog;
 import com.codename1.ui.Display;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Graphics;
@@ -35,6 +36,7 @@ import com.codename1.ui.util.Resources;
 import com.mycompagny.Service.ServiceBoutique;
 import com.mycompagny.Service.ServiceTask;
 import com.mycompany.Entite.Panier;
+import com.mycompany.Entite.Produit;
 import com.mycompany.Entite.User;
 import java.util.ArrayList;
 
@@ -134,7 +136,7 @@ public class PanierAffich extends   BaseForm {
         ServiceTask ser = new ServiceTask();
 					ArrayList<Panier> Tab = ser.getList4(User.connected.getNd());
 					for (int i = 0; i < Tab.size(); i++) {
-						addButton(res.getImage("nvnv3.jpg"),Tab.get(i).getName()+ " Prix :" + Tab.get(i).getPrix(), false, 11, 9);
+						addButton(res,res.getImage("nvnv3.jpg"),Tab.get(i).getName()+ " Prix :" + Tab.get(i).getPrix(), false, 11, 9,Tab.get(i).getId(),Tab.get(i).getIdProduit());
                                         
                                          
                 
@@ -187,7 +189,7 @@ public class PanierAffich extends   BaseForm {
 
         swipe.addTab("", page1);
     }
-  private void addButton(Image img, String title, boolean liked, int likeCount, int commentCount) {
+  private void addButton(Resources res,Image img, String title, boolean liked, int likeCount, int commentCount,int id,int idProduit) {
        int height = Display.getInstance().convertToPixels(11.5f);
        int width = Display.getInstance().convertToPixels(14f);
        Button image = new Button(img.fill(width, height));
@@ -218,7 +220,19 @@ public class PanierAffich extends   BaseForm {
                        BoxLayout.encloseX(likes, comments)
                ));
        add(cnt);
-       image.addActionListener(e -> ToastBar.showMessage(title, FontImage.MATERIAL_INFO));
+       image.addActionListener(e -> {
+                       boolean x ;
+			x = Dialog.show("Voulez vous supprime de Panier ?","","oui","non");
+                        if(x){
+                            ServiceBoutique bb =new ServiceBoutique();
+                           Produit p= bb.getveto(idProduit);
+                            bb.supprimerPanier(id, User.connected.getNd());
+                             new PanierAffich(res).show();
+
+                        }
+                       
+                        
+		});
    }
     
     

@@ -70,6 +70,78 @@ public class ServiceBoutique {
         NetworkManager.getInstance().addToQueueAndWait(con);
         return listpanierr ;
     }
+      
+      
+      public void settstock(int id , int stock){       
+        ConnectionRequest con = new ConnectionRequest();
+        con.setUrl("http://localhost/CRUD/SetStock.php?id="+id+"&stock="+stock);  
+      
+                NetworkManager.getInstance().addToQueueAndWait(con);
 
+    }
+      
+      public void supprimerPanier(int id , int idPersonne){       
+        ConnectionRequest con = new ConnectionRequest();
+        con.setUrl("http://localhost/CRUD/DeletePanier.php?id="+id+"&idPersonne="+idPersonne);  
+      
+                NetworkManager.getInstance().addToQueueAndWait(con);
+
+    }
+
+      public void setstockPanier(int id){       
+        ConnectionRequest con = new ConnectionRequest();
+        con.setUrl("http://localhost/CRUD/setstockPanier.php?id="+id);  
+      
+                NetworkManager.getInstance().addToQueueAndWait(con);
+
+    }
+      public Produit getvetoprofile(String json) {
+
+       Produit p = new Produit();
+
+        try {
+            System.out.println(json);
+            JSONParser j = new JSONParser();
+
+            Map<String, Object> etudiants = j.parseJSON(new CharArrayReader(json.toCharArray()));
+            System.out.println(etudiants);
+           
+            List<Map<String, Object>> list = (List<Map<String, Object>>) etudiants.get("root");
+  for (Map<String, Object> obj : list) {
+                // System.out.println(obj.get("id"));
+              
+                //e.setId(Integer.parseInt(obj.get("id").toString().trim()));
+             float stock = Float.parseFloat(obj.get("stock").toString());               
+                            p.setStock((int)stock);
+
+            
+          
+
+            }
+          
+
+        } catch (IOException ex) {
+        }
+        System.out.println(p);
+        return p;
+
+    }
+      Produit a = new Produit();
+
+    
+    
+      public Produit getveto(int d){       
+        ConnectionRequest con = new ConnectionRequest();
+        con.setUrl("http://localhost/CRUD/setstockPanier.php?id"+d);  
+        con.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                ServiceBoutique ser = new ServiceBoutique();
+                a = ser.getvetoprofile(new String(con.getResponseData()));
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(con);
+        return a ;
+    }
     
 }

@@ -196,7 +196,7 @@ public class ServiceTask {
                 
                 float aaa = Float.parseFloat(obj.get("prix").toString());
                 a.setPrix((int)aaa);
-
+               
 
                 System.out.println(a);
                 listPanier.add(a);

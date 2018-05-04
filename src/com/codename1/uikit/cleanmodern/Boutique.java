@@ -145,7 +145,7 @@ public class Boutique extends   BaseForm {
        ServiceTask ser = new ServiceTask();
 					ArrayList<Produit> Tab = ser.getList3();
 					for (int i = 0; i < Tab.size(); i++) {
-						addButton(Tab.get(i).getImage(),"Nom :"+ Tab.get(i).getNom()+ "  \n Prix :" + Tab.get(i).getPrix()+ "  \n Marque :" + Tab.get(i).getMarque()+"  \n Categorie :" + Tab.get(i).getCategorie()+"  \n Disponibilite :" + Tab.get(i).getStock() , false, 11, 9, Tab.get(i).getId(),Tab.get(i).getNom(),Tab.get(i).getPrix(),Tab.get(i).getStock());
+						addButton(res,Tab.get(i).getImage(),"Nom :"+ Tab.get(i).getNom()+ "  \n Prix :" + Tab.get(i).getPrix()+ "  \n Marque :" + Tab.get(i).getMarque()+"  \n Categorie :" + Tab.get(i).getCategorie()+"  \n Disponibilite :" + Tab.get(i).getStock() , false, 11, 9, Tab.get(i).getId(),Tab.get(i).getNom(),Tab.get(i).getPrix(),Tab.get(i).getStock());
                                         
                                          
                 
@@ -199,7 +199,7 @@ public class Boutique extends   BaseForm {
         swipe.addTab("", page1);
     }
     
-  private void addButton(String imageUrl, String title, boolean liked, int likeCount, int commentCount, int id,String nomProduit,float prixProduit, int stockProduit ) {
+  private void addButton(Resources res ,String imageUrl, String title, boolean liked, int likeCount, int commentCount, int id,String nomProduit,float prixProduit, int stockProduit ) {
 
 		ImageViewer im = new ImageViewer();
 
@@ -256,6 +256,9 @@ public class Boutique extends   BaseForm {
                             p.setIdProduit(id);
                             p.setPrix(prixProduit);
                             bb.addPanier(p);
+                             int stockProduits=stockProduit-1;
+                            bb.settstock(id,stockProduits);
+                            new Boutique(res).show();
                         }
                        }
                         
