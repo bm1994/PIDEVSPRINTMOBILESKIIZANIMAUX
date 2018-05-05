@@ -88,6 +88,9 @@ public class BaseForm extends Form {
         tb.addMaterialCommandToSideMenu("Mon Panier", FontImage.MATERIAL_ADD_SHOPPING_CART, e -> new PanierAffich(res).show());
         tb.addMaterialCommandToSideMenu("List Veterinaire", FontImage.MATERIAL_HOME, e -> new veterinaire(res).show());
         tb.addMaterialCommandToSideMenu("statistique", FontImage.MATERIAL_HOME, e -> new Statestique().createPieChartForm(res).show());
+        tb.addMaterialCommandToSideMenu("Annonce", FontImage.MATERIAL_HOME, e -> new AnnonceF(res).show());
+        tb.addMaterialCommandToSideMenu("Mes Annonces", FontImage.MATERIAL_BUSINESS, e -> new MesPropresAnnonces(res).show());
+        tb.addMaterialCommandToSideMenu("Mes Animaux", FontImage.MATERIAL_PIE_CHART, e -> new MesPropresAnimaux(res).show());
 
 
         tb.addMaterialCommandToSideMenu("Logout", FontImage.MATERIAL_EXIT_TO_APP, e -> new WalkthruForm(res).show());

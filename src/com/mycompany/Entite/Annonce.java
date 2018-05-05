@@ -15,9 +15,10 @@ public class Annonce {
     private String description;
     private String date_annonce;
     private String photo_annonce;
+    
     private String type_annonce;
-   private int id_animal;
-   private int id;
+   private Animal id_animal;
+   private User id;
 
     public int getId_annonce() {
         return id_annonce;
@@ -67,26 +68,26 @@ public class Annonce {
         this.type_annonce = type_annonce;
     }
 
-    public int getId_animal() {
+    public Animal getId_animal() {
         return id_animal;
     }
 
-    public void setId_animal(int id_animal) {
+    public void setId_animal(Animal id_animal) {
         this.id_animal = id_animal;
     }
 
-    public int getId() {
+    public User getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(User id) {
         this.id = id;
     }
 
     public Annonce() {
     }
 
-    public Annonce(int id_annonce, String titre_annonce, String description, String date_annonce, String photo_annonce, String type_annonce, int id_animal, int id) {
+    public Annonce(int id_annonce, String titre_annonce, String description, String date_annonce, String photo_annonce, String type_annonce, Animal id_animal, User id) {
         this.id_annonce = id_annonce;
         this.titre_annonce = titre_annonce;
         this.description = description;

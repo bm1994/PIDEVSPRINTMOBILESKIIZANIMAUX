@@ -14,6 +14,8 @@
     <image name="dog.jpg"  />
     <image name="dogg.jpg"  />
     <image name="facebook-logo.png" type="multi"  />
+    <image name="Facebook.png"  />
+    <image name="fb.jpg"  />
     <image name="fff1.jpg"  />
     <image name="hand.png"  />
     <image name="icon-1728552_960_720.jpg"  />
@@ -343,6 +345,18 @@
         <val key="WhiteSeparator.margin" value="0,0,0,0" />
         <val key="WhiteSeparator.padding" value="1,1,1,1" />
         <val key="WhiteSeparator.transparency" value="26" />
+        <val key="detailsinfoanimal.bgColor" value="ffffff" />
+        <gradient key="detailsinfoanimal.bgGradient" color1="0" color2="0" posX="0.5" posY="0.5" radius="1.0" />
+        <val key="detailsinfoanimal.bgType" value="0" />
+        <val key="detailsinfoanimal.fgColor" value="cc0033" />
+        <font key="detailsinfoanimal.font" type="ttf" face="32" style="1" size="0" name="native:MainBold" family="native:MainBold" sizeSettings="1" actualSize="12.0" />
+        <val key="detailsinfoanimal.transparency" value="255" />
+        <val key="leslabel.bgColor" value="ffffff" />
+        <gradient key="leslabel.bgGradient" color1="0" color2="0" posX="0.5" posY="0.5" radius="1.0" />
+        <val key="leslabel.bgType" value="0" />
+        <val key="leslabel.fgColor" value="0" />
+        <font key="leslabel.font" type="ttf" face="32" style="0" size="0" name="native:ItalicRegular" family="native:ItalicRegular" sizeSettings="3" actualSize="2.5" />
+        <val key="leslabel.transparency" value="255" />
         <val key="transparency" value="0" />
     </theme>
     <image name="timeline-background.jpg"  />
